@@ -1,0 +1,26 @@
+.main-header {
+    height: 60px;
+    background-color: #c38e70;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo-container {
+    height: 100%;
+    margin-left: 20px;
+}
+
+.logo-container img {
+    height: 100%;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+}
