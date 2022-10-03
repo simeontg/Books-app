@@ -6,3 +6,64 @@
 html {
   background-color: #deab90;
 }
+
+
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 70%;
+  border: 1px solid black;
+  background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('https://api.time.com/wp-content/uploads/2021/10/GettyImages-577674005.jpg') center;
+}
+
+.register, .login {
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: #fff;
+  background-color: #774936;
+  display: inline-block;
+  padding: 10px 40px 10px 40px;
+  position: relative;
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.register:hover, .login:hover {
+  color: #774936;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.5s;
+  border: 3px solid #774936;
+}
+
+.form-data-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+
+.form-data-container h1 {
+  margin: 50px 0;
+}
