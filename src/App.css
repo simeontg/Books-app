@@ -1,6 +1,7 @@
 * {
   margin: 0;
-  padding: 0
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -66,4 +67,11 @@ input {
 
 .form-data-container h1 {
   margin: 50px 0;
+}
+
+.catalog-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 30px;
 }

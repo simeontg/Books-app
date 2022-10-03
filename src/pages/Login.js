@@ -1,10 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+const onSubmit = (e) => { 
+    e.preventDefault()
+}
+
 const Login = () => {
   return (
     <section className='form-container'>
-            <form>
+            <form onSubmit={onSubmit}>
                 <div className="form-data-container">
                     <h1>Login</h1>
                     <label htmlFor="email">Email:</label>
