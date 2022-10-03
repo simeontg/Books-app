@@ -1,15 +1,11 @@
 import React from 'react'
 import BookItem from '../components/BookItem/BookItem'
+import { data } from '../data'
 
 const Catalog = () => {
   return (
     <div className='catalog-container'>
-    <BookItem />
-    <BookItem />
-    <BookItem />
-    <BookItem />
-    <BookItem />
-    <BookItem />
+      {data.map((data) => <BookItem book={data}/>)}
     </div>
   )
 }

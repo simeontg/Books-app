@@ -33,4 +33,20 @@
 }
 
 .book-item-btn {
+    padding: 10px 30px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background-color: #774936;
+    color: #fff;
+    border: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.book-item-btn:hover {
+    cursor: pointer;
+    background-color: #fff;
+    color: #774936;
+    border: 1px solid #774936;
+    transition: 0.5s;
 }
