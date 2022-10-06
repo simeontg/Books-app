@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './BookItem.module.css'
 
 const BookItem = ({book}) => {
@@ -12,9 +13,9 @@ const BookItem = ({book}) => {
             <p>{book.author}</p>
             <p>{book.genre}</p>
         </div>
-        <button className={styles['book-item-btn']}>
+        <Link to={`/catalog/${book._id}`} className={styles['book-item-btn']}>
             Details
-        </button>
+        </Link>
     </article>
   )
 }

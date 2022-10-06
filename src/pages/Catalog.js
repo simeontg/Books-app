@@ -5,7 +5,7 @@ import { data } from '../data'
 const Catalog = () => {
   return (
     <div className='catalog-container'>
-      {data.map((data) => <BookItem book={data}/>)}
+      {data.map((data) => <BookItem key={data._id} book={data}/>)}
     </div>
   )
 }
