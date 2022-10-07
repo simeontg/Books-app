@@ -16,7 +16,7 @@ const Navbar = () => {
 
             <div className={styles.links}>
                 <Link to="/create">Add Books</Link>
-                <Link to="/create">My Profile</Link>
+                <Link to="/profile">My Profile</Link>
                 <Link to="/logout">Logout</Link>
             </div>
 

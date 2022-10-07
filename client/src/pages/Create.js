@@ -29,6 +29,13 @@ const Create = () => {
             />
             <label htmlFor="description">Brief Description:</label>
             <textarea id="description" name="description" />
+            <label htmlFor="cover">Book Cover:</label>
+            <input 
+            type="text" 
+            id="cover" 
+            name="cover" 
+            placeholder='https://'
+            />
             <input type="submit" className="btn register" value="Create Book" />
         </div>
     </form>

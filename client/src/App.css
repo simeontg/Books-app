@@ -10,13 +10,13 @@ html {
 
 
 
-form {
+.form-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 30%;
-  height: 70%;
+  height: 80%;
   border: 1px solid black;
   background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('https://api.time.com/wp-content/uploads/2021/10/GettyImages-577674005.jpg') center;
 }

@@ -41,6 +41,7 @@
     border: none;
     font-weight: 500;
     letter-spacing: 1px;
+    text-decoration: none;
 }
 
 .book-item-btn:hover {
