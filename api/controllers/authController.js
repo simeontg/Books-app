@@ -31,10 +31,10 @@ const register = async (req, res, next) => {
         const token = user.createJWT()
       
         await user.save()
-        res.status(201).json({user: {
+        res.status(201).json({
             email: user.email,
-            username: user.username
-        }, token})
+            username: user.username,
+            token})
 }
 
 const login = async (req, res) => {

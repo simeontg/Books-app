@@ -1,10 +1,46 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
+import * as authService from '../services/authService'
 
 const Register = () => {
+    const navigate = useNavigate()
+
+    const {userLogin} = useContext(AuthContext)
+
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+        repass: ''
+    })
+
+    const onChangeHandler = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+
+    }
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        const {username, email, password, repass} = formData
+        if(password !== repass){
+            console.log('passwords do not match')
+            return
+        }
+        const data = await authService.register(username, email, password)
+        userLogin(data)
+        console.log(data)
+        navigate('/')
+
+    }
+    
+
   return (
     <section className='form-container'>
-    <form>
+    <form onSubmit={onSubmit}>
         <div className="form-data-container">
             <h1>Register</h1>
             <label htmlFor="username">Username:</label>
@@ -13,6 +49,8 @@ const Register = () => {
                 id="username"
                 name="username"
                 placeholder="username"
+                value={formData.username}
+                onChange={onChangeHandler}
             />
             <label htmlFor="email">Email:</label>
             <input
@@ -20,11 +58,25 @@ const Register = () => {
                 id="email"
                 name="email"
                 placeholder="email@gmail.com"
+                value={formData.email}
+                onChange={onChangeHandler}
             />
             <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" />
-            <label htmlFor="repeat-password">Confirm password:</label>
-            <input type="password" id="repeat-password" name="repeat-password" />
+            <input 
+            type="password"
+            id="password" 
+            name="password" 
+            value={formData.password}
+            onChange={onChangeHandler}
+            />
+            <label htmlFor="repass">Confirm password:</label>
+            <input 
+            type="password" 
+            id="repass" 
+            name="repass" 
+            value={formData.repass}
+            onChange={onChangeHandler}
+            />
             <input type="submit" className="btn register" value="Register" />
             <p className="field">
                 <span>

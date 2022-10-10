@@ -1,11 +1,31 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext';
+import * as authService from '../services/authService'
 
-const onSubmit = (e) => { 
-    e.preventDefault()
-}
+
+
 
 const Login = () => {
+    const navigate = useNavigate()
+    const { userLogin } = useContext(AuthContext);
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const onSubmit = async (e) => { 
+        e.preventDefault()
+        try {
+            const data = await authService.login(email, password)
+            userLogin(data)
+            console.log(data)
+            navigate('/')
+        }catch(err){
+            console.log(err)
+        }
+        
+    }
+
   return (
     <section className='form-container'>
             <form onSubmit={onSubmit}>
@@ -16,10 +36,17 @@ const Login = () => {
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="email@gmail.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id='password' name="password" />
+                    <input 
+                    type="password" 
+                    id='password' 
+                    name="password" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
                     <input type="submit" className="btn login" value="Login" />
                     <p className="field">
                         <span>

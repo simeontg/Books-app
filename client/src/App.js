@@ -9,20 +9,23 @@ import Catalog from './pages/Catalog';
 import Footer from './components/Footer/Footer';
 import Detail from './pages/Detail';
 import Create from './pages/Create';
+import { AuthProvider } from './context/AuthContext';
+import Logout from './components/Logout/Logout';
 
 function App() {
   return (
-    <>
+    <AuthProvider>
     <Navbar />
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+      <Route path='/logout' element={<Logout />} />
       <Route path='/create' element={<Create />} />
       <Route path='/catalog' element={<Catalog />} />
       <Route path='/catalog/:bookId' element={<Detail />} />
     </Routes>
-    </>
+    </AuthProvider>
     
   );
 }
