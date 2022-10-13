@@ -19,7 +19,7 @@ const BookSchema = new mongoose.Schema({
     description: {
         type: String,
         required: [true, 'Please provide description'],
-        maxlength: 100
+        maxlength: 400
     },
     imageUrl:{
         type: String,

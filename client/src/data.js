@@ -1,6 +1,6 @@
 export const data = [
     {
-        imageUrl: 'https://www.theyoungfolks.com/wp-content/uploads/2017/08/six-of-crows-770x1156.jpg',
+        imageUrl: '',
         title: 'Title 1 ',
         author: 'Author 1',
         genre: 'Genre 1',

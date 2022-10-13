@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import * as gameService from '../services/gameService'
+import * as bookService from '../services/bookService'
 
 const Create = () => {
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ const Create = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    gameService.createBook(bookState,user.token)
+    bookService.createBook(bookState,user.token)
     navigate('/catalog')
   }
 

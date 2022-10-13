@@ -1,9 +1,10 @@
 import express from 'express'
+import authenticateUser from '../middleware/auth.js'
+import {createBook,getAllBooks, getBookById} from '../controllers/booksController.js'
+
 const router = express.Router()
-
-import {createBook} from '../controllers/booksController.js'
-
-router.route('/').post(createBook)
+router.route('/').get(getAllBooks).post(authenticateUser,createBook)
+router.route('/:bookId').get(getBookById)
 
 
 export default router

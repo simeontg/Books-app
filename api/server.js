@@ -9,7 +9,6 @@ import morgan from 'morgan'
 import authRouter from './routes/authRoutes.js'
 import booksRouter from './routes/booksRouter.js'
 import notFoundMiddleware from './middleware/not-found.js'
-import authenticateUser from './middleware/auth.js'
 import errorHandlerMiddleware from './middleware/error-handler.js'
 const app = express()
 
@@ -25,7 +24,7 @@ app.get('/api/v1', (req,res) => {
 })
 
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/books',authenticateUser, booksRouter)
+app.use('/api/v1/books', booksRouter)
 
 
 app.use(notFoundMiddleware)
