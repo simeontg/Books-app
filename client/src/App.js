@@ -11,6 +11,7 @@ import Detail from './pages/Detail';
 import Create from './pages/Create';
 import { AuthProvider } from './context/AuthContext';
 import Logout from './components/Logout/Logout';
+import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 
 function App() {
   return (
@@ -20,8 +21,10 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
-      <Route path='/logout' element={<Logout />} />
-      <Route path='/create' element={<Create />} />
+      <Route element={<PrivateRoutes />} >
+          <Route path='/logout' element={<Logout />} />
+          <Route path='/create' element={<Create />} />
+      </Route>
       <Route path='/catalog' element={<Catalog />} />
       <Route path='/catalog/:bookId' element={<Detail />} />
     </Routes>

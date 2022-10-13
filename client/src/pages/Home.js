@@ -6,6 +6,8 @@ import BookItem from '../components/BookItem/BookItem'
 const Home = () => {
   const [books, setBooks] = useState([])
 
+  console.log('rendering...')
+
   useEffect(() => {
      axios.get('http://localhost:5000/api/v1/books')
      .then(result => {
