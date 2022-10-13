@@ -34,7 +34,8 @@ const register = async (req, res, next) => {
         res.status(201).json({
             email: user.email,
             username: user.username,
-            token})
+            token,
+            id: user._id})
 }
 
 const login = async (req, res) => {
@@ -61,7 +62,12 @@ const login = async (req, res) => {
            const token = user.createJWT()
            user.password = undefined
 
-    res.status(201).json({user,token})
+    res.status(201).json({
+        email: user.email,
+        username: user.username,
+        token,
+        id: user._id
+    })
     }catch(err){
       console.log(err)
     }

@@ -18,12 +18,16 @@ const UserSchema = new mongoose.Schema({
         },
         unique: true
     },
-
     password: {
         type: String,
         required: [true, 'Please provide password'],
         minlength: 6
-        }
+    },
+    wishlist: {
+        type: [mongoose.Types.ObjectId],
+        ref: 'Book',
+        default: []
+    }
 })
 
 UserSchema.methods.createJWT = function (){
@@ -31,3 +35,5 @@ UserSchema.methods.createJWT = function (){
 }
 
 export default mongoose.model('User', UserSchema)
+
+// trips: {type: [ObjectId], ref: 'Trip', default: []}
