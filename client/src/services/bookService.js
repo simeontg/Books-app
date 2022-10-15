@@ -9,9 +9,21 @@ export const createBook = async (book, userToken) => {
                 'Authorization': `Bearer ${userToken}`
             }
         })
-
         return result
     }catch(err){
         console.log(err)
     }
+}
+
+export const updateBook = async (book, bookId, userToken) => {
+  try{
+    const result = await axios.patch(`${mainUrl}/${bookId}`, book, {
+        headers: {
+            'Authorization': `Bearer ${userToken}`
+        }
+    })
+    return result
+  }catch(err){
+    console.log(err)
+  }
 }

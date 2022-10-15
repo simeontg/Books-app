@@ -9,7 +9,6 @@ const Catalog = () => {
   useEffect(() => {
      axios.get('http://localhost:5000/api/v1/books')
      .then(result => {
-      console.log(result)
       setBooks(result.data.books)
     })
      .catch(err => console.log(err))
@@ -17,7 +16,7 @@ const Catalog = () => {
 
   return (
     <div className='catalog-container'>
-      {books?.map(book => <BookItem key={book._id} book={book}/>)}
+      {books.map(book => <BookItem key={book._id} book={book}/>)}
     </div>
   )
 }

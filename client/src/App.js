@@ -12,6 +12,8 @@ import Create from './pages/Create';
 import { AuthProvider } from './context/AuthContext';
 import Logout from './components/Logout/Logout';
 import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
+import Edit from './pages/Edit';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -24,9 +26,11 @@ function App() {
       <Route element={<PrivateRoutes />} >
           <Route path='/logout' element={<Logout />} />
           <Route path='/create' element={<Create />} />
+          <Route path='/edit/:bookId' element={<Edit />} />
       </Route>
       <Route path='/catalog' element={<Catalog />} />
       <Route path='/catalog/:bookId' element={<Detail />} />
+      <Route path='*' element={<NotFound />} />
     </Routes>
     </AuthProvider>
     

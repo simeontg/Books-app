@@ -137,3 +137,17 @@ input {
   width: 270px;
   text-align: center;
 }
+
+.update-success {
+  color: green;
+  text-align: center;
+  font-weight: 600;
+}
+
+.owner {
+  display: none;
+}
+
+.non-owner {
+  display: none;
+}

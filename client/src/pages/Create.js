@@ -13,6 +13,7 @@ const Create = () => {
     description: '',
     imageUrl: '',
   });
+  const [updating, setUpdating] = useState(false)
 
   const onChangeHandler = (e) => {
     setBookState({
@@ -24,7 +25,10 @@ const Create = () => {
   const onSubmit = (e) => {
     e.preventDefault()
     bookService.createBook(bookState,user.token)
-    navigate('/catalog')
+    setUpdating(true)
+    setTimeout(() => {
+      navigate('/catalog')
+    }, 1000)
   }
 
 
@@ -79,6 +83,7 @@ const Create = () => {
             <input type="submit" className="btn register" value="Create Book" />
         </div>
     </form>
+    {updating && <p className='update-success'>Book created successfuly! Redirecting...</p>}
    </section>
   )
 }
