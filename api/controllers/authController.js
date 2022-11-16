@@ -66,7 +66,8 @@ const login = async (req, res) => {
         email: user.email,
         username: user.username,
         token,
-        id: user._id
+        id: user._id,
+        wishlist: user.wishlist
     })
     }catch(err){
       console.log(err)

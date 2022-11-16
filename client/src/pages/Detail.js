@@ -1,7 +1,10 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import Spinner from '../components/Spinner/Spinner'
 import { AuthContext } from '../context/AuthContext'
+import * as bookService from '../services/bookService'
+
 
 
 const Detail = () => {
@@ -11,22 +14,28 @@ const Detail = () => {
     const [book, setBook] = useState({})
     const [isOwner, setIsOwner] = useState(false)
     const [isNonOwner, setIsNonOwner] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [inWishlist, setInWishlist] = useState(user.wishlist.length)
 
 
     useEffect(() => {
+        setLoading(true)
         axios.get(`http://localhost:5000/api/v1/books/${bookId}`)
-        .then(result => setBook(result.data))
+        .then(result => {
+            setBook(result.data)
+            setLoading(false)
+        })
         .catch(err => console.log(err))
     },[bookId])
 
     useEffect(() => {
       
-        if(user.id && user.id != book.createdBy){
+        if(user.id && user.id !== book.createdBy){
             setIsNonOwner(true)
           }else{
             setIsNonOwner(false)
           }
-          if(user.id == book.createdBy){
+          if(user.id === book.createdBy){
             setIsOwner(true)
           }else{
             setIsOwner(false)
@@ -36,7 +45,6 @@ const Detail = () => {
     }, [user.id, book.createdBy])
 
     const onDeleteClick = async () => {
-        console.log('fsafafasfsfsafas')
         try{
             await axios.delete(`http://localhost:5000/api/v1/books/${bookId}`, {
                 headers: {
@@ -49,8 +57,27 @@ const Detail = () => {
         }
     }
 
+    const onAddToWishlist = async () => {
+        try{
+           await bookService.addToWishlist(bookId, user.token)
+           setInWishlist(true)
+        }catch(err){
+           console.log(err)
+        }
+    }
+
+    const onRemoveFromWishlist = async () => {
+        try{
+            await bookService.removeFromWishlist(bookId, user.token)
+            setInWishlist(false)
+        }catch(err){
+            console.log(err)
+        }
+    }
+
   
   return (
+    loading ? <Spinner /> :
     <section className='details-container'>
         <div className="book-cover-container">
             <img src={book.imageUrl} alt="" />
@@ -61,8 +88,26 @@ const Detail = () => {
             <p className='description'>{book.description}</p>
             <div className="details-buttons">
             <Link to={`/edit/${bookId}`} className='edit detail-btn owner' style={{display: isOwner ? 'inline' : 'none'}}>Edit</Link>
-            <button className='del detail-btn' style={{display: isOwner ? 'inline' : 'none'}} onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) onDeleteClick() } }>Delete</button>
-            <button className='wishlist detail-btn' style={{display: isNonOwner ? 'inline' : 'none'}}>Add to wishlist</button>
+            <button 
+            className='del detail-btn' 
+            style={{display: isOwner ? 'inline' : 'none'}} 
+            onClick={() => { if (window.confirm('Are you sure you wish to delete this item?') && isOwner) onDeleteClick() } }
+            >
+            Delete
+            </button>
+            {inWishlist ? <button 
+            className='wishlist detail-btn' 
+            style={{display: isNonOwner ? 'inline' : 'none'}}
+            onClick={onRemoveFromWishlist}
+            >
+            Remove from wishlist
+            </button> : <button 
+            className='wishlist detail-btn' 
+            style={{display: isNonOwner ? 'inline' : 'none'}}
+            onClick={onAddToWishlist}
+            >
+            Add to wishlist
+            </button>} 
             </div>
         </div>
     </section>

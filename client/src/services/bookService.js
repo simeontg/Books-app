@@ -27,3 +27,29 @@ export const updateBook = async (book, bookId, userToken) => {
     console.log(err)
   }
 }
+
+export const addToWishlist = async (bookId, userToken) => {
+    try{
+        const result = await axios.get(`${mainUrl}/wishlistAdd/${bookId}`, {
+            headers: {
+                'Authorization': `Bearer ${userToken}`
+            }
+        })
+        return result
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export const removeFromWishlist = async (bookId, userToken) => {
+    try{
+        const result = await axios.get(`${mainUrl}/wishlistRemove/${bookId}`, {
+            headers: {
+                'Authorization': `Bearer ${userToken}`
+            }
+        })
+        return result
+    }catch(err){
+        console.log(err)
+    }
+}

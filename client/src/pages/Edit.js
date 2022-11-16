@@ -40,8 +40,8 @@ const Edit = () => {
         bookService.updateBook(book, bookId, user.token)
         setUpdating(true)
         setTimeout(() => {
-            navigate('/catalog')
-        }, 1000)
+            navigate(`/catalog/${bookId}`)
+          }, 1000)
     }  
 
   return (

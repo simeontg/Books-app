@@ -27,7 +27,7 @@ const Register = () => {
         e.preventDefault()
         const {username, email, password, repass} = formData
         if(password !== repass){
-            console.log('passwords do not match')
+            alert('Passwords do not match')
             return
         }
         const data = await authService.register(username, email, password)

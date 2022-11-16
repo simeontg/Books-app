@@ -1,4 +1,5 @@
 import Book from "../models/Book.js"
+import User from '../models/User.js'
 import { BadRequestError, UnauthenticatedError} from '../errors/index.js'
 import checkPermission from "../utils/checkPermission.js"
 
@@ -74,7 +75,44 @@ const deleteBook = async (req, res) => {
    }catch(err){
       console.log(err)
    }
+}
 
+const addToWishlist = async (req,res) => {
+   const {bookId} = req.params
+   const {userId} = req.user
+   try{
+      const user = await User.findOne({_id: userId})
+      console.log(user.wishlist)
+      if(user.wishlist.includes(bookId)){
+         throw new BadRequestError('Book already in wishlist!')
+      }else{
+         user.wishlist = [...user.wishlist, bookId]
+         await user.save()
+         res.status(200).json({msg: 'Book added to wishlist!'})
+      }
+   }catch(err){
+      console.log(err)
+   }
+}
+
+const removeFromWishlist = async (req,res) => {
+   const {bookId} = req.params
+   const {userId} = req.user
+   try{
+      const user = await User.findOne({_id: userId})
+      console.log(user.wishlist)
+      if(user.wishlist.includes(bookId)){
+        const index = user.wishlist.indexOf(bookId)
+        user.wishlist.splice(index,1)
+        console.log(user.wishlist)
+        await user.save()
+        res.status(200).json({msg: 'Book removed from wishlist!'})
+      }else{
+        throw new BadRequestError ('No such book in wishlist!')
+      }
+   }catch(err){
+      console.log(err)
+   }
 }
 
 export{
@@ -82,5 +120,7 @@ export{
    getAllBooks,
    getBookById,
    updateBook,
-   deleteBook
+   deleteBook,
+   addToWishlist,
+   removeFromWishlist
 }
