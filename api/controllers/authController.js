@@ -9,27 +9,20 @@ const register = async (req, res, next) => {
 
 
         const {username, email, password} = req.body
-
         if(!username || !email || !password){
             throw new BadRequestError('All fields must be filled')
         }
-
         const userAlreadyExists = await User.findOne({email})
-
         if(userAlreadyExists){
             throw new BadRequestError('Email already exists')
         }
-
         const hashedPass = await bcrypt.hash(password, 10)
-
         const user = new User({
             username,
             email,
             password: hashedPass,
         })
-
         const token = user.createJWT()
-      
         await user.save()
         res.status(201).json({
             email: user.email,
@@ -40,13 +33,10 @@ const register = async (req, res, next) => {
 
 const login = async (req, res) => {
     try{
-
         const {email, password} = req.body
-
         if(!email || !password) {
             throw new BadRequestError('Please provide all values')
         }
-    
     const user = await User.findOne({ email })
         if(!user){
             throw new UnauthenticatedError('Email or password does not match')
@@ -72,9 +62,19 @@ const login = async (req, res) => {
     }catch(err){
       console.log(err)
     }
-    
- 
+}
+
+const getWishlist = async (req,res) => {
+    try{
+        const user = await User.findOne({_id: req.user.userId})
+        console.log(user)
+        res.status(200).json({
+            wishlist: user.wishlist
+        })
+    }catch(err){
+        console.log(err)
+    }
 }
 
 
-export {register,login}
+export {register,login,getWishlist}

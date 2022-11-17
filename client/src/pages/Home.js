@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
      axios.get('http://localhost:5000/api/v1/books')
      .then(result => {
-      setBooks(result.data.books)
+      setBooks(result.data.books.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).splice(0,4))
     })
      .catch(err => console.log(err))
   }, [])

@@ -14,6 +14,7 @@ import Logout from './components/Logout/Logout';
 import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route element={<PrivateRoutes />} >
+          <Route path='/profile' element={<Profile />} />
           <Route path='/logout' element={<Logout />} />
           <Route path='/create' element={<Create />} />
           <Route path='/edit/:bookId' element={<Edit />} />

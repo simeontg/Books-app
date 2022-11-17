@@ -151,3 +151,47 @@ input {
 .non-owner {
   display: none;
 }
+
+.profile-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.profile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid black;
+}
+
+.profile-books {
+  flex: 3
+}
+
+.profile-paragraphs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.profile-paragraphs p {
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 15px;
+}
+
+.profile-paragraphs p:hover {
+  border-bottom: 2px solid gray;
+}
+
+.profile-books-container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 46px;
+}

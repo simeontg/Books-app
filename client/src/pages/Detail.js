@@ -15,7 +15,7 @@ const Detail = () => {
     const [isOwner, setIsOwner] = useState(false)
     const [isNonOwner, setIsNonOwner] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [inWishlist, setInWishlist] = useState(user.wishlist.length)
+    const [wishlist, setWishlist] = useState(null)
 
 
     useEffect(() => {
@@ -26,7 +26,16 @@ const Detail = () => {
             setLoading(false)
         })
         .catch(err => console.log(err))
-    },[bookId])
+        if(user){
+            axios.get('http://localhost:5000/api/v1/auth/wishlist', {
+                headers: {'Authorization': `Bearer ${user.token}`}
+            })
+            .then(result => {
+                console.log(result)
+                setWishlist(result.data.wishlist)
+            }).catch(err => console.log(err))
+        }
+    },[bookId, user])
 
     useEffect(() => {
       
@@ -40,8 +49,6 @@ const Detail = () => {
           }else{
             setIsOwner(false)
           }
-      
-      
     }, [user.id, book.createdBy])
 
     const onDeleteClick = async () => {
@@ -59,8 +66,9 @@ const Detail = () => {
 
     const onAddToWishlist = async () => {
         try{
+            console.log(wishlist)
            await bookService.addToWishlist(bookId, user.token)
-           setInWishlist(true)
+           setWishlist(wishlist => [...wishlist, bookId])
         }catch(err){
            console.log(err)
         }
@@ -69,7 +77,7 @@ const Detail = () => {
     const onRemoveFromWishlist = async () => {
         try{
             await bookService.removeFromWishlist(bookId, user.token)
-            setInWishlist(false)
+            setWishlist(wishlist => wishlist.filter(b => b !== bookId))
         }catch(err){
             console.log(err)
         }
@@ -95,7 +103,7 @@ const Detail = () => {
             >
             Delete
             </button>
-            {inWishlist ? <button 
+            {wishlist?.includes(bookId) ? <button 
             className='wishlist detail-btn' 
             style={{display: isNonOwner ? 'inline' : 'none'}}
             onClick={onRemoveFromWishlist}
