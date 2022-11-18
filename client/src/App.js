@@ -15,6 +15,7 @@ import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       </Route>
       <Route path='/catalog' element={<Catalog />} />
       <Route path='/catalog/:bookId' element={<Detail />} />
+      <Route path='/search/:searchTerm' element={<Search />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
     </AuthProvider>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/images/logo.png'
 import { AuthContext } from '../../context/AuthContext'
 import styles from './Navbar.module.css'
@@ -8,6 +8,7 @@ import { BiSearch } from 'react-icons/bi'
 const Navbar = () => {
     const {isAuthenticated} = useContext(AuthContext)
     const [searchValue, setSearchValue] = useState('')
+    const navigate = useNavigate()
 
     const userNavBar = (
         <div className={styles.links}>
@@ -25,6 +26,7 @@ const Navbar = () => {
 
     const onSearchSubmit = (e) => {
         e.preventDefault()
+        navigate(`/search/${searchValue}`)
         setSearchValue('')
     }
 
@@ -41,11 +43,11 @@ const Navbar = () => {
                 <input 
                 className={styles['search']} 
                 type="text" 
-                placeholder='Search books'
+                placeholder='Search books by title or author'
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <BiSearch className={styles['icon']} />
+                <BiSearch onClick={onSearchSubmit} className={styles['icon']} />
             </form>
         </div>
         <nav>
