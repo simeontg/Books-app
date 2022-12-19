@@ -26,7 +26,7 @@ const Detail = () => {
             setLoading(false)
         })
         .catch(err => console.log(err))
-        if(user){
+        if(user.username){
             axios.get('http://localhost:5000/api/v1/auth/wishlist', {
                 headers: {'Authorization': `Bearer ${user.token}`}
             })

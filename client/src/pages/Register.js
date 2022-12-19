@@ -26,14 +26,16 @@ const Register = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
         const {username, email, password, repass} = formData
-        if(password !== repass){
-            alert('Passwords do not match')
-            return
+        try{
+            const data = await authService.register(username, email, password,repass)
+            if(data){
+                userLogin(data)
+                navigate('/')
+            }
+        }catch(err){
+            console.log(err)
         }
-        const data = await authService.register(username, email, password)
-        userLogin(data)
-        console.log(data)
-        navigate('/')
+
 
     }
     

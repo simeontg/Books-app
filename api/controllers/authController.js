@@ -6,15 +6,16 @@ import bcrypt from 'bcrypt'
 
 
 const register = async (req, res, next) => {
-
-
-        const {username, email, password} = req.body
-        if(!username || !email || !password){
+        const {username, email, password, repass} = req.body
+        if(!username || !email || !password || !repass){
             throw new BadRequestError('All fields must be filled')
         }
         const userAlreadyExists = await User.findOne({email})
         if(userAlreadyExists){
             throw new BadRequestError('Email already exists')
+        }
+        if(password !== repass){
+            throw new BadRequestError('Passwords do not match')
         }
         const hashedPass = await bcrypt.hash(password, 10)
         const user = new User({
@@ -32,7 +33,6 @@ const register = async (req, res, next) => {
 }
 
 const login = async (req, res) => {
-    try{
         const {email, password} = req.body
         if(!email || !password) {
             throw new BadRequestError('Please provide all values')
@@ -59,21 +59,16 @@ const login = async (req, res) => {
         id: user._id,
         wishlist: user.wishlist
     })
-    }catch(err){
-      console.log(err)
-    }
+    
 }
 
 const getWishlist = async (req,res) => {
-    try{
         const user = await User.findOne({_id: req.user.userId})
         console.log(user)
         res.status(200).json({
             wishlist: user.wishlist
         })
-    }catch(err){
-        console.log(err)
-    }
+   
 }
 
 

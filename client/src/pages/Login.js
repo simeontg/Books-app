@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Input from '../components/UI/Input';
 import { AuthContext } from '../context/AuthContext';
+// import useInput from '../hooks/useInput';
 import * as authService from '../services/authService'
 
 
@@ -9,6 +11,7 @@ import * as authService from '../services/authService'
 const Login = () => {
     const navigate = useNavigate()
     const { userLogin } = useContext(AuthContext);
+    // const {value} = useInput()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,9 +20,10 @@ const Login = () => {
         e.preventDefault()
         try {
             const data = await authService.login(email, password)
-            userLogin(data)
-            console.log(data)
-            navigate('/')
+            if(data){
+                userLogin(data)
+                navigate('/')
+            }
         }catch(err){
             console.log(err)
         }
