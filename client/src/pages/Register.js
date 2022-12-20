@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import * as authService from '../services/authService'
+import axios from 'axios'
+import Error from '../components/Error/Error'
+
+const baseUrl = "http://localhost:5000/api/v1/auth"
 
 const Register = () => {
     const navigate = useNavigate()
@@ -14,6 +17,7 @@ const Register = () => {
         password: '',
         repass: ''
     })
+    const [error, setError] = useState('')
 
     const onChangeHandler = (e) => {
         setFormData({
@@ -26,17 +30,17 @@ const Register = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
         const {username, email, password, repass} = formData
+
         try{
-            const data = await authService.register(username, email, password,repass)
+            const {data} = await axios.post(`${baseUrl}/register`, {username, email, password, repass})
+            console.log(data)
             if(data){
                 userLogin(data)
                 navigate('/')
-            }
-        }catch(err){
-            console.log(err)
+            } 
+        } catch(err) {
+            setError(err.response.data.msg)
         }
-
-
     }
     
 
@@ -45,6 +49,7 @@ const Register = () => {
     <form onSubmit={onSubmit}>
         <div className="form-data-container">
             <h1>Register</h1>
+            {error && <Error message={error}/>}
             <label htmlFor="username">Username:</label>
             <input
                 type="text"

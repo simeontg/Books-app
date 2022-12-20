@@ -195,3 +195,9 @@ input {
   justify-content: center;
   margin-top: 46px;
 }
+
+.error-paragraph {
+  text-align: center;
+  color: rgb(100, 27, 27);
+
+}

@@ -24,11 +24,20 @@ const Create = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    bookService.createBook(bookState,user.token)
-    setUpdating(true)
-    setTimeout(() => {
-      navigate('/catalog')
-    }, 1000)
+    const {title, author, genre, description, imageUrl} = bookState;
+    if(title === '' || author === '' || genre ==='' || description === '' || imageUrl === '' ){
+      return
+    }
+    try{
+      bookService.createBook(bookState,user.token)
+      setUpdating(true)
+      setTimeout(() => {
+        navigate('/catalog')
+      }, 1000)
+    }catch(err){
+      console.log(err)
+    }
+   
   }
 
 

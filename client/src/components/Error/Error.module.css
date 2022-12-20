@@ -1,0 +1,15 @@
+.container{
+    width: 50%;
+    height: 50px;
+    background-color: rgb(166, 16, 16);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.container p {
+    text-align: center;
+    color: white;
+    font-size: 13px;
+}

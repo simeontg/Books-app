@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './pages/Home';
 import { Routes, Route } from 'react-router-dom';
@@ -10,7 +9,6 @@ import Footer from './components/Footer/Footer';
 import Detail from './pages/Detail';
 import Create from './pages/Create';
 import { AuthProvider } from './context/AuthContext';
-import Logout from './components/Logout/Logout';
 import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
@@ -27,7 +25,6 @@ function App() {
       <Route path='/register' element={<Register />} />
       <Route element={<PrivateRoutes />} >
           <Route path='/profile' element={<Profile />} />
-          <Route path='/logout' element={<Logout />} />
           <Route path='/create' element={<Create />} />
           <Route path='/edit/:bookId' element={<Edit />} />
       </Route>
