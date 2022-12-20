@@ -66,7 +66,7 @@ const Detail = () => {
 
     const onAddToWishlist = async () => {
         try{
-            console.log(wishlist)
+           console.log(wishlist)
            await bookService.addToWishlist(bookId, user.token)
            setWishlist(wishlist => [...wishlist, bookId])
         }catch(err){

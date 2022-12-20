@@ -9,12 +9,19 @@ const Navbar = () => {
     const {isAuthenticated} = useContext(AuthContext)
     const [searchValue, setSearchValue] = useState('')
     const navigate = useNavigate()
+    const {userLogout} = useContext(AuthContext)
+
+
+    const onLogoutHandler = () => {
+        userLogout()
+        navigate('/')
+    }
 
     const userNavBar = (
         <div className={styles.links}>
         <Link to="/create">Add Books</Link>
         <Link to="/profile">My Profile</Link>
-        <Link to="/logout">Logout</Link>
+        <Link onClick={onLogoutHandler}>Logout</Link>
         </div>
     )
     const gusetNavBar = (

@@ -10,13 +10,10 @@ const createBook = async (req, res) => {
    if(!title || !author || !genre || !description || !imageUrl){
     throw new BadRequestError('Please provide all values')
    }
-   try{
       req.body.createdBy = req.user.userId
       const book = await Book.create(req.body)
       res.status(201).json({book})
-   }catch(err){
-      console.log(err)
-   }
+   
    
 }
 const getAllBooks = async(req, res) => {

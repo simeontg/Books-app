@@ -3,8 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import Input from '../components/UI/Input';
 import { AuthContext } from '../context/AuthContext';
 // import useInput from '../hooks/useInput';
-import * as authService from '../services/authService'
-
+import axios from 'axios'
+import Error from '../components/Error/Error';
+const baseUrl = "http://localhost:5000/api/v1/auth"
 
 
 
@@ -15,19 +16,23 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
     const onSubmit = async (e) => { 
         e.preventDefault()
-        try {
-            const data = await authService.login(email, password)
-            if(data){
-                userLogin(data)
-                navigate('/')
+        // if(password.trim().length < 6){
+        //     setError('Password must be at least 6 characters long')
+        // }
+            try{
+                const {data} = await axios.post(`${baseUrl}/login`, { email, password })
+                if(data){
+                    userLogin(data)
+                    navigate('/')
+                }
+            }catch(err){
+                setError(err.response.data.msg)
             }
-        }catch(err){
-            console.log(err)
-        }
-        
+       
     }
 
   return (
@@ -35,6 +40,7 @@ const Login = () => {
             <form onSubmit={onSubmit}>
                 <div className="form-data-container">
                     <h1>Login</h1>
+                    {error && <Error message={error}/>}
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"
