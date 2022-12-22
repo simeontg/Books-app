@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Input from '../components/UI/Input';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext'
 // import useInput from '../hooks/useInput';
 import axios from 'axios'
-import Error from '../components/Error/Error';
+import Error from '../components/Error/Error'
 const baseUrl = "http://localhost:5000/api/v1/auth"
 
 

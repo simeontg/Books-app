@@ -27,6 +27,11 @@ const UserSchema = new mongoose.Schema({
         type: [mongoose.Types.ObjectId],
         ref: 'Book',
         default: []
+    },
+    comments: {
+        type: [mongoose.Types.ObjectId],
+        ref: 'Comment',
+        default: []
     }
 })
 
