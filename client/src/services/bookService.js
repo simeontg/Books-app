@@ -11,7 +11,7 @@ export const createBook = async (book, userToken) => {
         })
         return result
     }catch(err){
-        console.log(err)
+        return Promise.reject(err)
     }
 }
 
@@ -24,7 +24,7 @@ export const updateBook = async (book, bookId, userToken) => {
     })
     return result
   }catch(err){
-    console.log(err)
+    return Promise.reject(err)
   }
 }
 
@@ -37,7 +37,7 @@ export const addToWishlist = async (bookId, userToken) => {
         })
         return result
     }catch(err){
-        console.log(err)
+        return Promise.reject(err)
     }
 }
 
@@ -50,6 +50,6 @@ export const removeFromWishlist = async (bookId, userToken) => {
         })
         return result
     }catch(err){
-        console.log(err)
+        return Promise.reject(err)
     }
 }

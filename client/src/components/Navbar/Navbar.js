@@ -33,7 +33,7 @@ const Navbar = () => {
 
     const onSearchSubmit = (e) => {
         e.preventDefault()
-        navigate(`/search/${searchValue}`)
+        if(searchValue) navigate(`/search/${searchValue}`)
         setSearchValue('')
     }
 

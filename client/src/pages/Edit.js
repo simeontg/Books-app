@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import Error from '../components/Error/Error';
 import { AuthContext } from '../context/AuthContext';
 import * as bookService from '../services/bookService'
+import hideError from '../utils/hideError';
 
 const Edit = () => {
     
@@ -17,6 +19,7 @@ const Edit = () => {
         imageUrl: '',
       })
     const [updating, setUpdating] = useState(false) 
+    const [error, setError] = useState('')
     
 
     useEffect(() => {
@@ -35,13 +38,20 @@ const Edit = () => {
             })
       }
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault()
-        bookService.updateBook(book, bookId, user.token)
-        setUpdating(true)
-        setTimeout(() => {
-            navigate(`/catalog/${bookId}`)
-          }, 1000)
+        try{
+            await bookService.updateBook(book, bookId, user.token)
+            setUpdating(true)
+            setTimeout(() => {
+                navigate(`/catalog/${bookId}`)
+              }, 1000)
+        }catch(err){
+            console.log(err)
+            setError(err.response.data.msg)
+            hideError(setError, 2000)
+        }
+        
     }  
 
   return (
@@ -49,6 +59,7 @@ const Edit = () => {
     <form onSubmit={onSubmitHandler}>
         <div className="form-data-container">
             <h1>Edit Book</h1>
+            {error && <Error message={error}/>}
             <label htmlFor="title">Title:</label>
             <input
                 type="text"

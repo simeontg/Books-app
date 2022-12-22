@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext'
 // import useInput from '../hooks/useInput';
 import axios from 'axios'
 import Error from '../components/Error/Error'
+import hideError from '../utils/hideError';
 const baseUrl = "http://localhost:5000/api/v1/auth"
 
 
@@ -31,6 +32,7 @@ const Login = () => {
                 }
             }catch(err){
                 setError(err.response.data.msg)
+                hideError(setError, 2000)
             }
        
     }

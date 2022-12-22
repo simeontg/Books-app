@@ -40,7 +40,6 @@ const updateBook = async(req, res) => {
    const bookId = req.params.bookId
    const {title, author, genre, description, imageUrl} = req.body
 
-   try{
       const book = await Book.findOne({_id: bookId})
       checkPermission(req.user, book.createdBy)
 
@@ -56,28 +55,20 @@ const updateBook = async(req, res) => {
 
       const updatedBook = await book.save()
       res.status(201).json(updatedBook)
-   }catch(err){
-      console.log(err)
-   }
 
 }
 
 const deleteBook = async (req, res) => {
    const bookId = req.params.bookId
-   try{
       const book = await Book.findOne({_id: bookId})
       checkPermission(req.user, book.createdBy)
       await book.remove()
       res.status(200).json({ msg: 'Book successfuly removed! '})
-   }catch(err){
-      console.log(err)
-   }
 }
 
 const addToWishlist = async (req,res) => {
    const {bookId} = req.params
    const {userId} = req.user
-   try{
       const user = await User.findOne({_id: userId})
       console.log(user.wishlist)
       if(user.wishlist.includes(bookId)){
@@ -87,15 +78,11 @@ const addToWishlist = async (req,res) => {
          await user.save()
          res.status(200).json({msg: 'Book added to wishlist!'})
       }
-   }catch(err){
-      console.log(err)
-   }
 }
 
 const removeFromWishlist = async (req,res) => {
    const {bookId} = req.params
    const {userId} = req.user
-   try{
       const user = await User.findOne({_id: userId})
       console.log(user.wishlist)
       if(user.wishlist.includes(bookId)){
@@ -107,9 +94,6 @@ const removeFromWishlist = async (req,res) => {
       }else{
         throw new BadRequestError ('No such book in wishlist!')
       }
-   }catch(err){
-      console.log(err)
-   }
 }
 
 export{

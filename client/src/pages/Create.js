@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Error from '../components/Error/Error';
 import { AuthContext } from '../context/AuthContext';
 import * as bookService from '../services/bookService'
+import hideError from '../utils/hideError';
 
 const Create = () => {
   const navigate = useNavigate()
@@ -14,6 +16,7 @@ const Create = () => {
     imageUrl: '',
   });
   const [updating, setUpdating] = useState(false)
+  const [error, setError] = useState('')
 
   const onChangeHandler = (e) => {
     setBookState({
@@ -22,20 +25,21 @@ const Create = () => {
         })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    const {title, author, genre, description, imageUrl} = bookState;
-    if(title === '' || author === '' || genre ==='' || description === '' || imageUrl === '' ){
-      return
-    }
+    // const {title, author, genre, description, imageUrl} = bookState;
+    // // if(title === '' || author === '' || genre ==='' || description === '' || imageUrl === '' ){
+    // //   return
+    // // }
     try{
-      bookService.createBook(bookState,user.token)
+      await bookService.createBook(bookState,user.token)
       setUpdating(true)
       setTimeout(() => {
         navigate('/catalog')
       }, 1000)
     }catch(err){
-      console.log(err)
+      setError(err.response.data.msg)
+      hideError(setError, 2000)
     }
    
   }
@@ -46,6 +50,7 @@ const Create = () => {
     <form onSubmit={onSubmit}>
         <div className="form-data-container">
             <h1>Create Book</h1>
+            {error && <Error message={error}/>}
             <label htmlFor="title">Title:</label>
             <input
                 type="text"
