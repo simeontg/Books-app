@@ -25,7 +25,7 @@ const Edit = () => {
     useEffect(() => {
         axios.get(`http://localhost:5000/api/v1/books/${bookId}`)
         .then(result => { 
-            const {title, author, genre, description, imageUrl, createdBy} = result.data
+            const {title, author, genre, description, imageUrl} = result.data
             setBook({title, author, genre, description, imageUrl})
         })
         .catch(err => console.log(err))

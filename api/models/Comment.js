@@ -4,12 +4,17 @@ const CommentSchema = new mongoose.Schema({
     message: {
         type: String,
         maxlength: 200
-    }, 
-    user: {
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
-        required: [true, 'Please provide user']
     },
+    user: {
+        userId: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+            required: [true, 'Please provide user']
+        },
+        username: {
+            type: String
+        }
+    }, 
     book: {
         type: mongoose.Types.ObjectId,
         ref: 'Book',
@@ -21,7 +26,7 @@ const CommentSchema = new mongoose.Schema({
         default: null
     },
     children: {
-        type: mongoose.Types.ObjectId,
+        type: [mongoose.Types.ObjectId],
         ref: 'Comment',
         default: []
     }

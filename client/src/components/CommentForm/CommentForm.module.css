@@ -1,0 +1,38 @@
+.comment-form-row {
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+  }
+
+  .message-input {
+    flex-grow: 1;
+    resize: none;
+    height: 70px;
+    border-radius: .5em;
+    padding: .5em;
+    font-size: inherit;
+    font-family: inherit;
+    border: 2px solid hsla(356, 73%, 26%, 0.484);
+    line-height: 1.4;
+    max-width: 500px;
+  }
+  
+  .message-input:focus {
+    border-color: hsl(0, 81%, 30%);
+    outline: none;
+  }
+
+  .btn {
+    padding: .5em 1em;
+    background: brown;
+    border: none;
+    color: white;
+    border-radius: .5em;
+    font-size: .75em;
+    cursor: pointer;
+  }
+  
+  .btn:hover,
+  .btn:focus-visible {
+    background: rgba(165, 42, 42, 0.436);
+  }

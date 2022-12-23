@@ -36,9 +36,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.methods.createJWT = function (){
-    return jwt.sign({userId: this._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_LIFETIME})
+    return jwt.sign({userId: this._id, username: this.username}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_LIFETIME})
 }
 
 export default mongoose.model('User', UserSchema)
-
-// trips: {type: [ObjectId], ref: 'Trip', default: []}
