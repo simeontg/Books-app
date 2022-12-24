@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import styles from './BookDetail.module.css'
 
-const BookDetail = ({bookId}) => {
+const BookDetail = ({bookId, setComments}) => {
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const [book, setBook] = useState({})
@@ -25,6 +25,7 @@ const BookDetail = ({bookId}) => {
         .then(result => {
             console.log(result.data)
             setBook(result.data)
+            setComments(Object.values(result.data.comments))
             setLoading(false)
         })
         .catch(err => console.log(err))

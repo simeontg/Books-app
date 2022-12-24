@@ -64,7 +64,7 @@ const login = async (req, res) => {
 
 const getWishlist = async (req,res) => {
         const user = await User.findOne({_id: req.user.userId})
-        console.log(user)
+        // console.log(user)
         res.status(200).json({
             wishlist: user.wishlist
         })

@@ -26,10 +26,14 @@ const CommentSchema = new mongoose.Schema({
         default: null
     },
     children: {
-        type: [mongoose.Types.ObjectId],
-        ref: 'Comment',
+        type: [Object],
         default: []
     }
 }, {timestamps: true})
+
+CommentSchema.pre('deleteOne', function(next){
+    
+    next()
+})
 
 export default mongoose.model('Comments', CommentSchema)

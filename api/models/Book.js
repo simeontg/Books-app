@@ -31,8 +31,7 @@ const BookSchema = new mongoose.Schema({
         required: [true, 'Please provide user']
     },
     comments: {
-        type: [mongoose.Types.ObjectId],
-        ref: 'Comment',
+        type: [Object],
         default: []
     }
 },
